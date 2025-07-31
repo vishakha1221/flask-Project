@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - MyBlog{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col items-center justify-center bg-darkBg">
+    <div class="bg-darkCard p-8 rounded-lg shadow-lg w-full max-w-md">
+        <div class="flex items-center mb-6">
+            {% if user.profile_pic_url %}
+                <img src="{{ user.profile_pic_url }}" alt="Profile Picture" class="w-12 h-12 rounded-full mr-4">
+            {% else %}
+                <div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white text-xl font-bold mr-4">
+                    {{ user.name[0] | upper }}
+                </div>
+            {% endif %}
+            <h2 class="text-2xl font-bold text-darkText">Welcome, {{ user.name }}!</h2>
+        </div>
+        <p class="text-darkText">This is your dashboard.</p>
+        <a href="{{ url_for('logout') }}" class="mt-4 inline-block bg-primary text-white font-semibold py-2 px-4 rounded-md hover:bg-primaryHover">Logout</a>
+    </div>
+</div>
+{% endblock %} 

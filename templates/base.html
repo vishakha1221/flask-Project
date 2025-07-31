@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MyBlog{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1a202c; /* darkBg */
+            color: #e2e8f0; /* darkText */
+        }
+        .bg-darkBg { background-color: #1a202c; }
+        .bg-darkCard { background-color: #2d3748; }
+        .border-darkBorder { border-color: #4a5568; }
+        .text-darkText { color: #e2e8f0; }
+        .text-primary { color: #667eea; } /* A shade of indigo/purple */
+        .hover\:bg-primaryHover:hover { background-color: #5a67d8; } /* Slightly darker primary */
+
+        /* Flash message styling */
+        .flash-message {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        .flash-success {
+            background-color: #48bb78; /* green-500 */
+            color: #fff;
+        }
+        .flash-warning {
+            background-color: #ecc94b; /* yellow-500 */
+            color: #333;
+        }
+        .flash-error, .flash-danger {
+            background-color: #ef4444; /* red-500 */
+            color: #fff;
+        }
+        .flash-info {
+            background-color: #4299e1; /* blue-500 */
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-darkText">
+    <nav class="bg-darkCard p-4 shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{{ url_for('index') }}" class="text-white text-2xl font-bold">MyBlog</a>
+            <div>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('dashboard') }}" class="text-darkText hover:text-primary mr-4">Dashboard</a>
+                    <a href="{{ url_for('logout') }}" class="bg-red-600 text-white px-3 py-2 rounded-md hover:bg-red-700">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}" class="text-darkText hover:text-primary mr-4">Login</a>
+                    <a href="{{ url_for('register') }}" class="bg-primary text-white px-3 py-2 rounded-md hover:bg-primaryHover">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto mt-8 px-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="mb-4">
+                    {% for category, message in messages %}
+                        <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
