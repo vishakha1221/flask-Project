@@ -47,14 +47,14 @@
 <body class="bg-darkBg text-darkText">
     <nav class="bg-darkCard p-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="{{ url_for('index') }}" class="text-white text-2xl font-bold">MyBlog</a>
+            <a href="{{ url_for('main.index') }}" class="text-white text-2xl font-bold">MyBlog</a>
             <div>
                 {% if current_user.is_authenticated %}
-                    <a href="{{ url_for('dashboard') }}" class="text-darkText hover:text-primary mr-4">Dashboard</a>
-                    <a href="{{ url_for('logout') }}" class="bg-red-600 text-white px-3 py-2 rounded-md hover:bg-red-700">Logout</a>
+                    <a href="{{ url_for('main.dashboard') }}" class="text-darkText hover:text-primary mr-4">Dashboard</a>
+                    <a href="{{ url_for('auth.logout') }}" class="bg-red-600 text-white px-3 py-2 rounded-md hover:bg-red-700">Logout</a>
                 {% else %}
-                    <a href="{{ url_for('login') }}" class="text-darkText hover:text-primary mr-4">Login</a>
-                    <a href="{{ url_for('register') }}" class="bg-primary text-white px-3 py-2 rounded-md hover:bg-primaryHover">Register</a>
+                    <a href="{{ url_for('auth.login') }}" class="text-darkText hover:text-primary mr-4">Login</a>
+                    <a href="{{ url_for('auth.register') }}" class="bg-primary text-white px-3 py-2 rounded-md hover:bg-primaryHover">Register</a>
                 {% endif %}
             </div>
         </div>
