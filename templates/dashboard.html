@@ -16,7 +16,7 @@
             <h2 class="text-2xl font-bold text-darkText">Welcome, {{ user.name }}!</h2>
         </div>
         <p class="text-darkText">This is your dashboard.</p>
-        <a href="{{ url_for('logout') }}" class="mt-4 inline-block bg-primary text-white font-semibold py-2 px-4 rounded-md hover:bg-primaryHover">Logout</a>
+        <a href="{{ url_for('auth.logout') }}" class="mt-4 inline-block bg-primary text-white font-semibold py-2 px-4 rounded-md hover:bg-primaryHover">Logout</a>
     </div>
 </div>
-{% endblock %} 
+{% endblock %}
